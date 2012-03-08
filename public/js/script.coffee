@@ -240,7 +240,7 @@ drawShape = (ctx, shape, color) ->
 	ctx.fillStyle = "rgba("+color.r+","+color.g+","+color.b+","+color.a+")"
 	ctx.beginPath()
 	ctx.moveTo(shape[0].x, shape[0].y)
-	for i [1..ACTUAL_POINTS]
+	for i in [1..ACTUAL_POINTS]
 		ctx.lineTo(shape[i].x, shape[i].y)
 	ctx.closePath()
 	ctx.fill()
@@ -248,7 +248,7 @@ drawShape = (ctx, shape, color) ->
 drawDNA = (ctx, dna) ->
 	ctx.fillStyle = "rgb(255,255,255)"
 	ctx.fillRect(0, 0, IWIDTH, IHEIGHT)
-	for i [0..ACTUAL_POINTS]
+	for i in [0..ACTUAL_POINTS]
 		drawShape(ctx, dna[i].shape, dna[i].color)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -259,24 +259,25 @@ rand_bell = (range, center) ->
 	dist = bell_distributions[range]
 	if !dist
 		dist = bell_precompute(range, range/6, 40)
-	off = bell_offsets[range]
-	return center + dist[off[-center]+Math.floor((off[range-center+1]-off[-center])*Math.random())]
+	off2 = bell_offsets[range]
+	return center + dist[off2[-center]+Math.floor((off2[range-center+1]-off2[-center])*Math.random())]
 
 bell_precompute = (range, spread, resolution) ->
 	accumulator = 0
 	step = 1 / resolution
 	dist = new Array()
-	off = new Array()
+	off2 = new Array()
 	index = 0
 
 	# Revisar este for
 	for x in [-range-1..range+2]
-		off[x] = index
+		off2[x] = index
 		accumulator = step + Math.exp(-x*x/2/spread/spread)
 		while (accumulator >= step)
-			if (x != 0) dist[index++] = x
+			if (x != 0)
+				dist[index++] = x
 			accumulator -= step
-	bell_offsets[range] = off
+	bell_offsets[range] = off2
 	return bell_distributions[range] = dist
 
 test_bell = (count, range, center) ->
@@ -342,187 +343,168 @@ mutate_gauss = (dna_out) ->
 			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y = rand_bell(IHEIGHT, dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-mutate_medium(dna_out) {
-	CHANGED_SHAPE_INDEX = rand_int(ACTUAL_SHAPES-1);
+mutate_medium = (dna_out) ->
+	CHANGED_SHAPE_INDEX = rand_int(ACTUAL_SHAPES-1)
 
-	roulette = rand_float(2.0);
+	roulette = rand_float(2.0)
 
-	// mutate color
-	if(roulette<1) {
-		// red
-		if(roulette<0.25) {
-			dna_out[CHANGED_SHAPE_INDEX].color.r = rand_int(255);
-		}
-		// green
-		else if(roulette<0.5) {
-			dna_out[CHANGED_SHAPE_INDEX].color.g = rand_int(255);
-		}
-		// blue
-		else if(roulette<0.75) {
-			dna_out[CHANGED_SHAPE_INDEX].color.b = rand_int(255);
-		}
-		// alpha
-		else if(roulette<1.0) {
-			dna_out[CHANGED_SHAPE_INDEX].color.a = rand_float(1.0);
-		}
-	}
+	# mutate color
+	if roulette<1
+		# red
+		if roulette<0.25
+			dna_out[CHANGED_SHAPE_INDEX].color.r = rand_int(255)
+		# green
+		else if roulette<0.5
+			dna_out[CHANGED_SHAPE_INDEX].color.g = rand_int(255)
+		# blue
+		else if roulette<0.75
+			dna_out[CHANGED_SHAPE_INDEX].color.b = rand_int(255)
+		# alpha
+		else if roulette<1.0
+			dna_out[CHANGED_SHAPE_INDEX].color.a = rand_float(1.0)
 
-	// mutate shape
-	else {
-		CHANGED_POINT_INDEX = rand_int(ACTUAL_POINTS-1);
+	# mutate shape
+	else
+		CHANGED_POINT_INDEX = rand_int(ACTUAL_POINTS-1)
 
-		// x-coordinate
-		if(roulette<1.5) {
-			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].x = rand_int(IWIDTH);
-		}
+		# x-coordinate
+		if roulette<1.5
+			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].x = rand_int(IWIDTH)
 
-		// y-coordinate
-		else {
-			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y = rand_int(IHEIGHT);
-		}
-	}
-}
+		# y-coordinate
+		else
+			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y = rand_int(IHEIGHT)
 
-mutate_hard(dna_out) {
-	CHANGED_SHAPE_INDEX = rand_int(ACTUAL_SHAPES-1);
+mutate_hard = (dna_out) ->
+	CHANGED_SHAPE_INDEX = rand_int(ACTUAL_SHAPES-1)
 
-	dna_out[CHANGED_SHAPE_INDEX].color.r = rand_int(255);
-	dna_out[CHANGED_SHAPE_INDEX].color.g = rand_int(255);
-	dna_out[CHANGED_SHAPE_INDEX].color.b = rand_int(255);
-	dna_out[CHANGED_SHAPE_INDEX].color.a = rand_float(1.0);
-	CHANGED_POINT_INDEX = rand_int(ACTUAL_POINTS-1);
+	dna_out[CHANGED_SHAPE_INDEX].color.r = rand_int(255)
+	dna_out[CHANGED_SHAPE_INDEX].color.g = rand_int(255)
+	dna_out[CHANGED_SHAPE_INDEX].color.b = rand_int(255)
+	dna_out[CHANGED_SHAPE_INDEX].color.a = rand_float(1.0)
+	CHANGED_POINT_INDEX = rand_int(ACTUAL_POINTS-1)
 
-	dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].x = rand_int(IWIDTH);
-	dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y = rand_int(IHEIGHT);
-}
+	dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].x = rand_int(IWIDTH)
+	dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y = rand_int(IHEIGHT)
 
-mutate_soft(dna_out) {
-	CHANGED_SHAPE_INDEX = rand_int(ACTUAL_SHAPES-1);
+mutate_soft = (dna_out) ->
+	CHANGED_SHAPE_INDEX = rand_int(ACTUAL_SHAPES-1)
 
-	roulette = rand_float(2.0);
+	roulette = rand_float(2.0)
 
-	delta = -1+rand_int(3);
+	delta = -1+rand_int(3)
 
-	// mutate color
-	if(roulette<1) {
-		// red
-		if(roulette<0.25) {
-			dna_out[CHANGED_SHAPE_INDEX].color.r = clamp(dna_out[CHANGED_SHAPE_INDEX].color.r+delta, 0, 255);
-		}
-		// green
-		else if(roulette<0.5) {
-			dna_out[CHANGED_SHAPE_INDEX].color.g = clamp(dna_out[CHANGED_SHAPE_INDEX].color.g+delta, 0, 255);
-		}
-		// blue
-		else if(roulette<0.75) {
-			dna_out[CHANGED_SHAPE_INDEX].color.b = clamp(dna_out[CHANGED_SHAPE_INDEX].color.b+delta, 0, 255);
-		}
-		// alpha
-		else if(roulette<1.0) {
-			dna_out[CHANGED_SHAPE_INDEX].color.a = clamp(dna_out[CHANGED_SHAPE_INDEX].color.a+0.1*delta, 0.0, 1.0);
-		}
-	}
+	# mutate color
+	if roulette<1
+		# red
+		if roulette<0.25
+			dna_out[CHANGED_SHAPE_INDEX].color.r = clamp(dna_out[CHANGED_SHAPE_INDEX].color.r+delta, 0, 255)
+		# green
+		else if roulette<0.5
+			dna_out[CHANGED_SHAPE_INDEX].color.g = clamp(dna_out[CHANGED_SHAPE_INDEX].color.g+delta, 0, 255)
+		# blue
+		else if roulette<0.75
+			dna_out[CHANGED_SHAPE_INDEX].color.b = clamp(dna_out[CHANGED_SHAPE_INDEX].color.b+delta, 0, 255)
+		# alpha
+		else if roulette<1.0
+			dna_out[CHANGED_SHAPE_INDEX].color.a = clamp(dna_out[CHANGED_SHAPE_INDEX].color.a+0.1*delta, 0.0, 1.0)
 
-	// mutate shape
-	else {
-		CHANGED_POINT_INDEX = rand_int(ACTUAL_POINTS-1);
+	# mutate shape
+	else
+		CHANGED_POINT_INDEX = rand_int(ACTUAL_POINTS-1)
 
-		// x-coordinate
-		if(roulette<1.5) {
-			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].x = clamp(dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].x+delta, 0, IWIDTH);
-		}
+		# x-coordinate
+		if roulette<1.5
+			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].x = clamp(dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].x+delta, 0, IWIDTH)
 
-		// y-coordinate
-		else {
-			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y = clamp(dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y+delta, 0, IHEIGHT);
-		}
-	}
-}
+		# y-coordinate
+		else
+			dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y = clamp(dna_out[CHANGED_SHAPE_INDEX].shape[CHANGED_POINT_INDEX].y+delta, 0, IHEIGHT)
 
-compute_fitness(dna) {
-	fitness = 0;
+compute_fitness = (dna) ->
+	fitness = 0
 
-	DATA_TEST = CONTEXT_TEST.getImageData(0, 0, IWIDTH, IHEIGHT).data;
+	DATA_TEST = CONTEXT_TEST.getImageData(0, 0, IWIDTH, IHEIGHT).data
 
-	for(i=0;i<SUBPIXELS;++i) {
-		if(i%DEPTH!=3)
-			fitness += Math.abs(DATA_INPUT[i]-DATA_TEST[i]);
-	}
+	for i in [0..SUBPIXELS]
+		if i%DEPTH != 3
+			fitness += Math.abs(DATA_INPUT[i]-DATA_TEST[i])
+	fitness
 
-	return fitness;
-}
+pass_gene_mutation = (dna_from, dna_to, gene_index) ->
+	dna_to[gene_index].color.r = dna_from[gene_index].color.r
+	dna_to[gene_index].color.g = dna_from[gene_index].color.g
+	dna_to[gene_index].color.b = dna_from[gene_index].color.b
+	dna_to[gene_index].color.a = dna_from[gene_index].color.a
 
-pass_gene_mutation(dna_from, dna_to, gene_index) {
-	dna_to[gene_index].color.r = dna_from[gene_index].color.r;
-	dna_to[gene_index].color.g = dna_from[gene_index].color.g;
-	dna_to[gene_index].color.b = dna_from[gene_index].color.b;
-	dna_to[gene_index].color.a = dna_from[gene_index].color.a;
+	for i in [0..MAX_POINTS]
+		dna_to[gene_index].shape[i].x = dna_from[gene_index].shape[i].x
+		dna_to[gene_index].shape[i].y = dna_from[gene_index].shape[i].y
 
-	for(i=0;i<MAX_POINTS;i++) {
-		dna_to[gene_index].shape[i].x = dna_from[gene_index].shape[i].x;
-		dna_to[gene_index].shape[i].y = dna_from[gene_index].shape[i].y;
-	}
-}
-
-copyDNA(dna_from, dna_to) {
-	for(i=0;i<MAX_SHAPES;i++)
+copyDNA = (dna_from, dna_to) ->
+	for i in [0..MAX_SHAPES]
 		pass_gene_mutation(dna_from, dna_to, i);
-}
 
 evolve = () ->
-	mutateDNA(DNA_TEST);
-	drawDNA(CONTEXT_TEST, DNA_TEST);
+	#mutateDNA(DNA_TEST)
+	drawDNA(CONTEXT_TEST, DNA_TEST)
 
-	FITNESS_TEST = compute_fitness(DNA_TEST);
+	FITNESS_TEST = compute_fitness(DNA_TEST)
 
-	if(FITNESS_TEST<FITNESS_BEST) {
-		pass_gene_mutation(DNA_TEST, DNA_BEST, CHANGED_SHAPE_INDEX);
+	if FITNESS_TEST<FITNESS_BEST
+		pass_gene_mutation(DNA_TEST, DNA_BEST, CHANGED_SHAPE_INDEX)
 
-		FITNESS_BEST = FITNESS_TEST;
-		FITNESS_BEST_NORMALIZED = 100*(1-FITNESS_BEST/NORM_COEF);
-		EL_FITNESS.innerHTML = FITNESS_BEST_NORMALIZED.toFixed(2)+"%";
+		FITNESS_BEST = FITNESS_TEST
+		FITNESS_BEST_NORMALIZED = 100*(1-FITNESS_BEST/NORM_COEF)
+		EL_FITNESS.innerHTML = FITNESS_BEST_NORMALIZED.toFixed(2)+"%"
 
-		COUNTER_BENEFIT++;
-		EL_STEP_BENEFIT.innerHTML = COUNTER_BENEFIT;
+		COUNTER_BENEFIT++
+		EL_STEP_BENEFIT.innerHTML = COUNTER_BENEFIT
 
-		drawDNA(CONTEXT_BEST, DNA_BEST);
-	}
-	else {
-		pass_gene_mutation(DNA_BEST, DNA_TEST, CHANGED_SHAPE_INDEX);
-	}
+		drawDNA(CONTEXT_BEST, DNA_BEST)
+	else
+		pass_gene_mutation(DNA_BEST, DNA_TEST, CHANGED_SHAPE_INDEX)
 
-	COUNTER_TOTAL++;
-	EL_STEP_TOTAL.innerHTML = COUNTER_TOTAL;
+	COUNTER_TOTAL++
+	EL_STEP_TOTAL.innerHTML = COUNTER_TOTAL
 
-	if(COUNTER_TOTAL%10==0) {
-		passed = get_timestamp() - LAST_START;
-		EL_ELAPSED_TIME.innerHTML = render_nice_time(ELAPSED_TIME+passed);
-	}
-	if(COUNTER_TOTAL%50==0) {
-		mutsec = (COUNTER_TOTAL-LAST_COUNTER)/(get_timestamp() - LAST_START);
-		EL_MUTSEC.innerHTML = mutsec.toFixed(1);
-	}
-}
+	if COUNTER_TOTAL%10==0
+		passed = get_timestamp() - LAST_START
+		EL_ELAPSED_TIME.innerHTML = render_nice_time(ELAPSED_TIME+passed)
+
+	if COUNTER_TOTAL%50==0
+		mutsec = (COUNTER_TOTAL-LAST_COUNTER)/(get_timestamp() - LAST_START)
+		EL_MUTSEC.innerHTML = mutsec.toFixed(1)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-init_dna(dna) {
-	for(i=0;i<MAX_SHAPES;i++) {
-		points = new Array(MAX_POINTS);
-		for(j=0;j<MAX_POINTS;j++) {
-			points[j] = {'x':rand_int(IWIDTH),'y':rand_int(IHEIGHT)};
-		}
-		color = {};
-		if(INIT_TYPE=="random")
-			color = {'r':rand_int(255),'g':rand_int(255),'b':rand_int(255),'a':0.001};
+init_dna = (dna) ->
+	for i in [0..MAX_SHAPES]
+		points = new Array(MAX_POINTS)
+		for j in [0..MAX_POINTS]
+			points[j] = {
+				'x': rand_int(IWIDTH)
+				'y': rand_int(IHEIGHT)
+			}
+		color = {}
+		if INIT_TYPE=='random'
+			color = {
+				'r': rand_int(255)
+				'g': rand_int(255)
+				'b': rand_int(255)
+				'a': 0.001
+			}
 		else
-			color = {'r':INIT_R,'g':INIT_G,'b':INIT_B,'a':INIT_A};
+			color = {
+				'r': INIT_R
+				'g': INIT_G
+				'b': INIT_B
+				'a': INIT_A
+			}
 		shape = {
-		'color':color,
-		'shape':points
+			'color': color
+			'shape': points
 		}
-		dna[i] = shape;
-	}
-}
+		dna[i] = shape
 
 extend_dna_polygons = (dna) ->
 	points = new Array(MAX_POINTS)
@@ -627,25 +609,25 @@ serializeDNAasSVG = (dna) ->
 	dna_string = ""
 
 	# header
-	dna_string += "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-	dna_string += "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n"
-	dna_string += "<svg xmlns=\"http://www.w3.org/2000/svg\"\n"
-	dna_string += "xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:ev=\"http://www.w3.org/2001/xml-events\"\n"
-	dna_string += "version=\"1.1\" baseProfile=\"full\"\n"
-	dna_string += "width=\"800mm\" height=\"600mm\">\n"
+	dna_string += '<?xml version="1.0" encoding="utf-8"?>\n'
+	dna_string += '!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN\" \'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n'
+	dna_string += 'svg xmlns="http://www.w3.org/2000/svg"\n'
+	dna_string += 'xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"\n'
+	dna_string += 'version="1.1" baseProfile="full"\n'
+	dna_string += 'width="800mm" height="600mm">\n'
 
 	# shapes
 	for i in [0..ACTUAL_SHAPES]
-		dna_string += "<polygon points=\"";
+		dna_string += '<polygon points="';
 		for j in [0..ACTUAL_SHAPES]
-			dna_string += dna[i].shape[j].x+" "
-			dna_string += dna[i].shape[j].y+" "
-		dna_string += "\" fill=\"rgb("
-		dna_string += dna[i].color.r+","
-		dna_string += dna[i].color.g+","
-		dna_string += dna[i].color.b+")\" opacity=\""
-		dna_string += dna[i].color.a+"\" />\n"
-	dna_string +=  "<\/svg>\n"
+			dna_string += dna[i].shape[j].x+' '
+			dna_string += dna[i].shape[j].y+' '
+		dna_string += '" fill="rgb('
+		dna_string += dna[i].color.r+','
+		dna_string += dna[i].color.g+','
+		dna_string += dna[i].color.b+')" opacity="'
+		dna_string += dna[i].color.a+'" />\n'
+	dna_string +=  '</svg>\n'
 	return dna_string
 
 deserializeDNA = (dna, text) ->
@@ -732,6 +714,12 @@ select_all = () ->
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 init = () ->
+	$('#start').on('click', () ->
+		start()
+	)
+	$('#stop').on('click', () ->
+		stop()
+	)	
 	IMAGE.onload = () ->
 		# hack to work around ugly, ugly bug
 		# onload event firing is unreliable
@@ -744,3 +732,6 @@ init = () ->
 
 	setButtonHighlight("b_dna_black", ["b_dna_random", "b_dna_white", "b_dna_black"])
 	setButtonHighlight("b_mut_med", ["b_mut_gauss", "b_mut_soft", "b_mut_med", "b_mut_hard"])
+
+$ ->
+	init()
