@@ -238,7 +238,10 @@ legend
  * 3. Define consistent vertical alignment display in all browsers
  */
 
-button, input, select, textarea
+button
+input
+select
+textarea
 	font-size 100%
 	margin 0
 	vertical-align baseline
@@ -257,7 +260,8 @@ button, input
  * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
  */
 
-button, input[type="button"], input[type="reset"], input[type="submit"]
+button, input[type="button"]
+input[type="reset"], input[type="submit"]
 	cursor pointer
 	-webkit-appearance button
 	*overflow visible
@@ -266,14 +270,16 @@ button, input[type="button"], input[type="reset"], input[type="submit"]
  * Re-set default cursor for disabled elements
  */
 
-button[disabled], input[disabled]
+button[disabled]
+input[disabled]
 	cursor default
 
 /*
  * Consistent box sizing and appearance
  */
 
-input[type="checkbox"], input[type="radio"]
+input[type="checkbox"]
+input[type="radio"]
 	box-sizing border-box
 	padding 0
 	*width 13px
@@ -285,14 +291,16 @@ input[type="search"]
 	-webkit-box-sizing content-box
 	box-sizing content-box
 
-input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button
+input[type="search"]::-webkit-search-decoration
+input[type="search"]::-webkit-search-cancel-button
 	-webkit-appearance none
 
 /*
  * Remove inner padding and border in FF3/4: h5bp.com/l
  */
 
-button::-moz-focus-inner, input::-moz-focus-inner
+button::-moz-focus-inner
+input::-moz-focus-inner
 	border 0
 	padding 0
 
@@ -307,9 +315,11 @@ textarea
 	resize vertical
 
 /* Colors for form validity */
-input:valid, textarea:valid
+input:valid
+textarea:valid
 
-input:invalid, textarea:invalid
+input:invalid
+textarea:invalid
 	background-color input-invalid
 
 /* =============================================================================
@@ -340,7 +350,16 @@ td
 @import 'nib'
 @import '_animations'
 
+input
+textarea
+	border 1px dotted outline-color
+	padding 4px
 
+input:active
+textarea:active
+input:focus
+textarea:focus
+	outline 1px solid outline-color
 /* INICIO Estilos copiados */
 aaa
 	outline: dotted 1px red
@@ -353,7 +372,7 @@ h2
 	margin-top: 1.75em
 
 canvas
-	border: solid 1px #000
+	border 1px dotted color-rose
 
 .image
 	float: left
@@ -367,9 +386,9 @@ ul
 	list-style-type: square
 
 a:hover
-	background: #1e4881
-	color: white
-	text-decoration: none
+	background color-rose
+	color white
+	text-decoration none
 
 #algo, #dnaformat
 	background: #eee
