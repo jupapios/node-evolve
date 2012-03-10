@@ -63,7 +63,6 @@ div(role='main')
 			div.button#b_export_dna Export DNA
 			div.button#b_export_svg Export SVG
 			div.button#b_import_dna Import DNA
-			a(href="#export_note")[help]
 			br
 			textarea(name="clipboard")#clipboard
 
@@ -82,15 +81,17 @@ div(role='main')
 			div.button#b_dna_black Black
 
 		div#geometry
-			div.button -
-			div.button +
+			div.button#b_remove_polygon -
+			div.button#b_add_polygon +
 			span.parname.pargeo
-				span#polygons 50 Polygons
+				span#polygons 50
+				|  Polygons
 			br
-			div.button -
-			div.button +
+			div.button#b_remove_vertex -
+			div.button#b_add_vertex +
 			span.parname.pargeo
-				span#vertices 6 Vertices
+				span#vertices 6
+				|  Vertices
 
 	br.clr
 footer
