@@ -652,10 +652,10 @@
     dna_string = '';
     dna_string += '<?xml version="1.0" encoding="utf-8"?>\n';
     dna_string += '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n';
-    dna_string += '<svg xmlns="http://www.w3.org/2000/svg"\n';
-    dna_string += 'xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"\n';
-    dna_string += 'version="1.1" baseProfile="full"\n';
-    dna_string += 'width="800mm" height="600mm">\n';
+    dna_string += '<svg xmlns="http://www.w3.org/2000/svg" ';
+    dna_string += 'xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" ';
+    dna_string += 'version="1.1" baseProfile="full" ';
+    dna_string += 'width="200px" height="200px">\n';
     for (i = 0, _ref = ACTUAL_SHAPES - 1; 0 <= _ref ? i <= _ref : i >= _ref; 0 <= _ref ? i++ : i--) {
       dna_string += '<polygon points="';
       for (j = 0, _ref2 = ACTUAL_POINTS - 1; 0 <= _ref2 ? j <= _ref2 : j >= _ref2; 0 <= _ref2 ? j++ : j--) {

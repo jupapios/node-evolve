@@ -611,10 +611,10 @@ serializeDNAasSVG = (dna) ->
 	# header
 	dna_string += '<?xml version="1.0" encoding="utf-8"?>\n';
 	dna_string += '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n';
-	dna_string += '<svg xmlns="http://www.w3.org/2000/svg"\n';
-	dna_string += 'xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"\n';
-	dna_string += 'version="1.1" baseProfile="full"\n';
-	dna_string += 'width="800mm" height="600mm">\n';
+	dna_string += '<svg xmlns="http://www.w3.org/2000/svg" ';
+	dna_string += 'xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" ';
+	dna_string += 'version="1.1" baseProfile="full" ';
+	dna_string += 'width="200px" height="200px">\n';
 
 	# shapes
 	for i in [0..ACTUAL_SHAPES-1]
