@@ -205,8 +205,7 @@
       'medium': [mutate_medium, 'b_mut_med'],
       'hard': [mutate_hard, 'b_mut_hard']
     };
-    mutateDNA = trans[m][0];
-    return setButtonHighlight(trans[m][1], ['b_mut_gauss', 'b_mut_soft', 'b_mut_med', 'b_mut_hard']);
+    return mutateDNA = trans[m][0];
   };
 
   setDnaRandom = function() {
@@ -783,8 +782,7 @@
       }
     };
     IMAGE.src = IMG_INIT;
-    setButtonHighlight('b_dna_black', ['b_dna_random', 'b_dna_white', 'b_dna_black']);
-    return setButtonHighlight('b_mut_med', ['b_mut_gauss', 'b_mut_soft', 'b_mut_med', 'b_mut_hard']);
+    return setButtonHighlight('b_dna_black', ['b_dna_random', 'b_dna_white', 'b_dna_black']);
   };
 
   window.onload = function() {

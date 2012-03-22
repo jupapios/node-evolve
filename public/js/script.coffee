@@ -172,7 +172,7 @@ setMutation = (m) ->
 		'hard': [mutate_hard,'b_mut_hard']
 
 	mutateDNA = trans[m][0]
-	setButtonHighlight(trans[m][1], ['b_mut_gauss', 'b_mut_soft', 'b_mut_med', 'b_mut_hard'])
+	#setButtonHighlight(trans[m][1], ['b_mut_gauss', 'b_mut_soft', 'b_mut_med', 'b_mut_hard'])
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -726,7 +726,7 @@ init = () ->
 	IMAGE.src = IMG_INIT
 
 	setButtonHighlight('b_dna_black', ['b_dna_random', 'b_dna_white', 'b_dna_black'])
-	setButtonHighlight('b_mut_med', ['b_mut_gauss', 'b_mut_soft', 'b_mut_med', 'b_mut_hard'])
+	#setButtonHighlight('b_mut_med', ['b_mut_gauss', 'b_mut_soft', 'b_mut_med', 'b_mut_hard'])
 
 window.onload = () ->
 	init()
