@@ -686,13 +686,13 @@ import_dna = () ->
 set_image = () ->
 	el = document.getElementById('imgurl')
 	if el
+		IMAGE.src = el.value
 		IMAGE.onload = () ->
 			# hack around onload bug
 			if IMAGE.complete
 				init_canvas()
 			else
 				setTimeout(init_canvas, 100)
-		IMAGE.src = 'proxy.php?i='+el.value
 
 set_example_image = (lnk) ->
 	if lnk
@@ -776,3 +776,7 @@ window.onload = () ->
 		addVertex()
 	document.getElementById('b_remove_vertex').onclick = () ->
 		removeVertex()
+
+	# set new image
+	document.getElementById('b_setimage').onclick = () ->
+		set_image()

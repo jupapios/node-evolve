@@ -739,14 +739,14 @@
     var el;
     el = document.getElementById('imgurl');
     if (el) {
-      IMAGE.onload = function() {
+      IMAGE.src = el.value;
+      return IMAGE.onload = function() {
         if (IMAGE.complete) {
           return init_canvas();
         } else {
           return setTimeout(init_canvas, 100);
         }
       };
-      return IMAGE.src = 'proxy.php?i=' + el.value;
     }
   };
 
@@ -834,8 +834,11 @@
     document.getElementById('b_add_vertex').onclick = function() {
       return addVertex();
     };
-    return document.getElementById('b_remove_vertex').onclick = function() {
+    document.getElementById('b_remove_vertex').onclick = function() {
       return removeVertex();
+    };
+    return document.getElementById('b_setimage').onclick = function() {
+      return set_image();
     };
   };
 
