@@ -1,21 +1,62 @@
 header
 .home(role='main')
 	section.images
-		.grid-2
+		article.grid-2
 			.img
 				h2 Original
 				canvas(width='150', height='150')
-		.grid-2
+		article.grid-2
 			.img
 				h2 Best
 				canvas(width='150', height='150')
-		.grid-2
+		article.grid-2
 			.img
 				h2 Evolving
-				canvas(width='150', height='150')				
-		.grid-2.stats
+				canvas(width='150', height='150')
+		article.grid-2.stats
 			h2 &nbsp;
 			span Fitness
 			span Improvements
 			span Mutations
+	section.mutations
+		article.grid-4
+			h3 Mutation:
+			div.icos
+				div.ico
+					figure.gauss
+					figcaption
+						span.ico-text Guassian
+				div.ico
+					figure.soft
+					figcaption
+						span.ico-text Soft
+				div.ico
+					figure.medium
+					figcaption
+						span.ico-text Medium
+				div.ico
+					figure.hard
+					figcaption
+						span.ico-text Hard
+		article.grid-4
+			span Set new image url: 
+			input.input-url
+	section.controls
+		article.grid-4
+			textarea.textarea
+		article.grid-4
+			h3 Initialize DNA:
+			div.icos.colors
+				div.ico
+					figure.white
+					figcaption
+						span.ico-text White
+				div.ico
+					figure.black
+					figcaption
+						span.ico-text Black
+				div.ico
+					figure.color
+					figcaption
+						span.ico-text Color
 footer
