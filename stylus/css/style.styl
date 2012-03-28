@@ -238,10 +238,7 @@ legend
  * 3. Define consistent vertical alignment display in all browsers
  */
 
-button
-input
-select
-textarea
+button, input, select, textarea
 	font-size 100%
 	margin 0
 	vertical-align baseline
@@ -260,8 +257,7 @@ button, input
  * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
  */
 
-button, input[type="button"]
-input[type="reset"], input[type="submit"]
+button, input[type="button"], input[type="reset"], input[type="submit"]
 	cursor pointer
 	-webkit-appearance button
 	*overflow visible
@@ -270,16 +266,14 @@ input[type="reset"], input[type="submit"]
  * Re-set default cursor for disabled elements
  */
 
-button[disabled]
-input[disabled]
+button[disabled], input[disabled]
 	cursor default
 
 /*
  * Consistent box sizing and appearance
  */
 
-input[type="checkbox"]
-input[type="radio"]
+input[type="checkbox"], input[type="radio"]
 	box-sizing border-box
 	padding 0
 	*width 13px
@@ -291,16 +285,14 @@ input[type="search"]
 	-webkit-box-sizing content-box
 	box-sizing content-box
 
-input[type="search"]::-webkit-search-decoration
-input[type="search"]::-webkit-search-cancel-button
+input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button
 	-webkit-appearance none
 
 /*
  * Remove inner padding and border in FF3/4: h5bp.com/l
  */
 
-button::-moz-focus-inner
-input::-moz-focus-inner
+button::-moz-focus-inner, input::-moz-focus-inner
 	border 0
 	padding 0
 
@@ -315,11 +307,9 @@ textarea
 	resize vertical
 
 /* Colors for form validity */
-input:valid
-textarea:valid
+input:valid, textarea:valid
 
-input:invalid
-textarea:invalid
+input:invalid, textarea:invalid
 	background-color input-invalid
 
 /* =============================================================================
@@ -348,215 +338,14 @@ td
 	 ========================================================================== */
 
 @import 'nib'
+@import '_fonts'
+@import '_utils'
 @import '_animations'
 
-input
-textarea
-	border 1px dotted outline-color
-	padding 4px
+header
+	height 100px
 
-input:active
-textarea:active
-input:focus
-textarea:focus
-	outline 1px solid outline-color
-/* INICIO Estilos copiados */
-aaa
-	outline: dotted 1px red
-
-body
-	font-family: arial, sans-serif
-	padding: 1em
-
-h2
-	margin-top: 1.75em
-
-canvas
-	border 1px dotted color-rose
-
-.image
-	float: left
-	margin: 0 0.5em 0 0
-	font-size: 2em
-
-.clr
-	clear: both
-
-ul
-	list-style-type: square
-
-a:hover
-	background color-rose
-	color white
-	text-decoration none
-
-#algo, #dnaformat
-	background: #eee
-	padding: 1em
-	margin-top: 1em
-	border-left: solid 10px #999
-
-.snapshot ul, .snapshot img
-	float: left
-
-.snapshot ul
-	margin: 0 1em 1.5em 0
-	color: #333
-	width: 13em
-
-.wide ul
-	width: 30em
-
-#fitwrap
-	font-weight: bold
-	font-size: 1em
-	color: #999
-	margin: 2em 1em 0 0
-	float: left
-	width: 15em
-
-#fitness, #step_benefit, #step_total
-	font-size: 2em
-
-#fitness
-	color: #000
-
-#step_benefit
-	color: #0a0
-
-#step_total
-	color: #aa0
-
-#stats
-	font-size: 0.8em
-	color: #aaa
-	float: left
-	position: relative
-	top: 3em
-	margin-top: -2em
-
-#time
-	color: #a00
-
-#mutsec
-	color: #a80
-
-#start, #stop
-	width: 4em
-	margin-top: 0.5em
-	padding: 0.5em
-	background: black
-	text-align: center
-	float: left
-	cursor: pointer
-	font-size: 2em
-
-#start
-	color: lightgreen
-
-#stop
-	color: red
-	display: none
-
-#imgform
-	float: left
-	border: solid 0px #000
-	padding: 0em
-	margin: 0.5em 1em 0 0
-	width: 40em
-
-#imgurl
-	width: 35em
-
-.button
-	background: #000
-	color: #fff
-	cursor: pointer
-	width: 3em
-	padding: 0.2em 0.5em 0.2em 0.5em
-	text-align: center
-	display: inline
-
-.button:hover
-	background: #a00
-	color: white
-
-.warning
-	color: red
-
-.highlighted
-	color: yellow
-
-#dnaformwrap
-	padding: 0
-	float: left
-	margin: 1em 1em 0 0
-
-#clipboard
-	width: 50em
-	height: 13em
-	margin: 1em 0 0 0
-
-#mutationtype, #resetdna
-	margin: 0 0 0.4em 0
-
-#parameters
-	float: left
-	margin: 2em 0 0 0
-
-.parname
-	margin: 0 0 0.2em 0
-
-#geometry
-	margin: 1em 0 0.4em 0
-
-#polygons, #vertices
-	font-size: 2em
-
-.pargeo
-	margin: 0 0 0 0.5em
-	position: relative
-	top: 0.4em
-
-#geometry .button
-	font-weight: bold
-	width: 1em
-
-dt
-	font-weight: bold
-	margin-bottom: 0.5em
-
-dd
-	margin: 0 0 2em 0
-
-.speed
-	font-size: 0.9em
-	color: #60BF5F
-
-
-/* FIN Estilos copiados */
-
-.butt
-	cursor pointer
-	float left
-	text-indent -99999px
-	height 80px
-	margin-right 8px
-	transition all 300ms linear
-	width 80px
-
-	&:hover
-		transform rotate(6deg)
-
-div#b_mut_gauss
-	background url('/img/gauss.png') no-repeat
-div#b_mut_soft
-	background url('/img/soft.png') no-repeat
-div#b_mut_med
-	background url('/img/med.png') no-repeat
-div#b_mut_hard
-	background url('/img/hard.png') no-repeat
-
+@import '_main'
 
 
 /* ==|== media queries ======================================================

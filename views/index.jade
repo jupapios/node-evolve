@@ -1,97 +1,21 @@
 header
-div(role='main')
-	div.image
-		| Original
-		br
-		canvas#canvas_input
-
-	div.image
-		| Best
-		br
-		canvas#canvas_best
-
-	div.image
-		| Evolving
-		br
-		canvas#canvas_test
-
-	div#fitwrap
-		span#fitness ?
-		|  Fitness
-		br
-
-		span#step_benefit 0
-		|  Improvements
-		br
-
-		span#step_total 0
-		|  Mutations
-		br
-
-		div#start Start
-		div#stop Stop
-
-		div#stats
-			span#time 0
-			|  Elapsed time
-			br
-			span#mutsec ?
-			|  Mutations per second
-			br
-
-	br.clr
-
-	div#imgform
-		form
-			div.button#b_setimage Set new image URL
-			input#imgurl
-		small(style="color:#555;") Image should be small (~200x200 pixels), otherwise fitness computation is very slow.
-		p 
-			small(style="color:#555;") Examples:
-				a(href="img/mona_lisa_crop.jpg") Mona Lisa
-				|  
-				a(href="img/darwin_crop.jpg") Darwin
-				|  
-				a(href="img/velociraptor2_crop.jpg") Velociraptor
-				|  
-				a(href="img/koza_crop.jpg") John Koza
-
-	br.clr
-
-	div#dnaformwrap
-		form(name="dnaform")
-			div.button#b_export_dna Export DNA
-			div.button#b_export_svg Export SVG
-			div.button#b_import_dna Import DNA
-			br
-			textarea(name="clipboard")#clipboard
-
-	div#parameters
-		div#mutationtype
-			div.parname Mutation
-			div.butt#b_mut_gauss Gaussian
-			div.butt#b_mut_soft Soft
-			div.butt#b_mut_med Medium
-			div.butt#b_mut_hard Hard
-
-		div#resetdna
-			div.parname Initialize DNA
-			div.button#b_dna_random Color
-			div.button#b_dna_white White
-			div.button#b_dna_black Black
-
-		div#geometry
-			div.button#b_remove_polygon -
-			div.button#b_add_polygon +
-			span.parname.pargeo
-				span#polygons 50
-				|  Polygons
-			br
-			div.button#b_remove_vertex -
-			div.button#b_add_vertex +
-			span.parname.pargeo
-				span#vertices 6
-				|  Vertices
-
-	br.clr
+.home(role='main')
+	section.images
+		.grid-2
+			.img
+				h2 Original
+				canvas(width='150', height='150')
+		.grid-2
+			.img
+				h2 Best
+				canvas(width='150', height='150')
+		.grid-2
+			.img
+				h2 Evolving
+				canvas(width='150', height='150')				
+		.grid-2.stats
+			h2 &nbsp;
+			span Fitness
+			span Improvements
+			span Mutations
 footer
