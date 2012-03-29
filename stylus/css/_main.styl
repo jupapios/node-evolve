@@ -1,7 +1,7 @@
 .home
 	padding-left width-1-col
 	//padding-left 8%
-
+	width width-8-col
 	section
 		margin-bottom padding-block * 2
 		*zoom 1
@@ -28,18 +28,29 @@
 					display block
 					margin-bottom padding-block * 2
 
+					&:last-child
+						margin-bottom 0
+
 		&.mutations
+			position relative
 			.input-url
 				background-color transparent
 				border 0
 				border-bottom 1px solid color-gray-light
 				outline 0
-
+				width width-2-col + padding-block * 2
+ 
 				&:active
 				&:focus
 					border-bottom 1px solid color-gray
+			.url
+				bottom 0
+				position absolute
+				right 0
 
 		&.controls
+			.buttons
+				margin-top padding-block
 			.textarea
 				border 2px solid color-gray
 				border-radius 14px
@@ -70,25 +81,52 @@
 				width @height
 
 				&:hover
-					transform rotate(60deg)
-			.gauss
+					transform rotate(60deg) scale(1.1)
+			#btn-gauss
 				background url('../img/icos/gauss.png') no-repeat
-			.soft
+			#btn-soft
 				background url('../img/icos/soft.png') no-repeat
-			.medium
+			#btn-medium
 				background url('../img/icos/medium.png') no-repeat
-			.hard
+			#btn-hard
 				background url('../img/icos/hard.png') no-repeat
+
+			.active
+				opacity 0.2
 		&.colors
 			.ico
 				figure
 					height 43px
 					width @height
 
-				.black
+				#btn-color-black
 					background url('../img/icos/color-black.png') no-repeat
-				.white
+				#btn-color-white
 					background url('../img/icos/color-white.png') no-repeat
-				.color
+				#btn-color-blue
 					background url('../img/icos/color-blue.png') no-repeat
+		&.counters
+			margin-left 12px
+			margin-top 1.2em
+			.ico
+				margin-right 20px
+			.ico-count
+				margin-left auto
+				margin-right auto
+				width padding-block * 3 + 6px
+				& > div
+					cursor pointer
+					height 25px
+					float left
+					margin-left 10px
+					width @height
 
+					&:first-child
+						margin-left 2px
+
+				#btn-poly-more
+				#btn-vert-more
+					background url('../img/icos/ico-more.png') no-repeat
+				#btn-poly-less
+				#btn-vert-less
+					background url('../img/icos/ico-less.png') no-repeat

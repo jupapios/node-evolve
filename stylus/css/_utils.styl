@@ -17,6 +17,12 @@
 .grid-6
 	float left
 	width width-6-col
+.grid-7
+	float left
+	width width-7-col
+.grid-8
+	float left
+	width width-8-col		
 
 // Floats
 .left
@@ -24,8 +30,7 @@
 .right
 	float right
 
-// h2, h3
-
+// Text
 h2
 h3
 	color color-gray
@@ -43,3 +48,19 @@ span
 	color color-gray-light
 	font-family 'AstuteSSiLight'
 	font-size 1.1em
+
+// Buttons
+.btn
+	border 2px solid color-gray
+	border-radius 16px
+	color color-gray-light
+	cursor pointer
+	font-family 'AstuteSSiLight'	
+	display inline
+	font-size 0.95em
+	margin 0 8px
+	padding 3px 9px
+	transition all 250ms linear
+
+	&:hover
+		opacity 0.5

@@ -4,15 +4,15 @@ header
 		article.grid-2
 			.img
 				h2 Original
-				canvas(width='150', height='150')
+				canvas#canvas_input(width='150', height='150')
 		article.grid-2
 			.img
 				h2 Best
-				canvas(width='150', height='150')
+				canvas#canvas_best(width='150', height='150')
 		article.grid-2
 			.img
 				h2 Evolving
-				canvas(width='150', height='150')
+				canvas#canvas_test(width='150', height='150')
 		article.grid-2.stats
 			h2 &nbsp;
 			span Fitness
@@ -23,40 +23,57 @@ header
 			h3 Mutation:
 			div.icos
 				div.ico
-					figure.gauss
+					figure#btn-gauss
 					figcaption
 						span.ico-text Guassian
 				div.ico
-					figure.soft
+					figure#btn-soft
 					figcaption
 						span.ico-text Soft
 				div.ico
-					figure.medium
+					figure#btn-medium
 					figcaption
 						span.ico-text Medium
 				div.ico
-					figure.hard
+					figure#btn-hard
 					figcaption
 						span.ico-text Hard
-		article.grid-4
+		article.url
 			span Set new image url: 
 			input.input-url
 	section.controls
 		article.grid-4
 			textarea.textarea
+			.buttons
+				.btn Export DNA
+				.btn Export SVG
+				.btn Import DNA
 		article.grid-4
 			h3 Initialize DNA:
 			div.icos.colors
 				div.ico
-					figure.white
+					figure#btn-color-white
 					figcaption
 						span.ico-text White
 				div.ico
-					figure.black
+					figure#btn-color-black
 					figcaption
 						span.ico-text Black
 				div.ico
-					figure.color
+					figure#btn-color-blue
 					figcaption
 						span.ico-text Color
+			div.icos.counters
+				div.ico
+					div.ico-count
+						div#btn-poly-more
+						div#btn-poly-less
+					div
+						span.ico-text Polygons
+				div.ico
+					div.ico-count
+						div#btn-vert-more
+						div#btn-vert-less
+					div
+						span.ico-text Vertex						
 footer
