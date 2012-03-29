@@ -13,7 +13,7 @@
 
   routes = require('./routes');
 
-  port = process.env.PORT || 3000;
+  port = 8003;
 
   app = module.exports = express.createServer();
 
@@ -63,7 +63,5 @@
   app.get('/', routes.index);
 
   app.listen(port);
-
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
 }).call(this);
